@@ -77,6 +77,11 @@
 		47EC11612275FB7200A06AA3 /* Marvel-Wiki */ = {
 			isa = PBXGroup;
 			children = (
+				47EC11872275FBB900A06AA3 /* Extensions */,
+				47EC11862275FBB200A06AA3 /* DI */,
+				47EC11852275FBA300A06AA3 /* Services */,
+				47EC11832275FB8700A06AA3 /* Storage */,
+				47EC11822275FB8000A06AA3 /* Character */,
 				47EC11622275FB7200A06AA3 /* AppDelegate.swift */,
 				47EC11642275FB7200A06AA3 /* ViewController.swift */,
 				47EC11662275FB7200A06AA3 /* Main.storyboard */,
@@ -94,6 +99,49 @@
 				47EC11792275FB7500A06AA3 /* Info.plist */,
 			);
 			path = "Marvel-WikiTests";
+			sourceTree = "<group>";
+		};
+		47EC11822275FB8000A06AA3 /* Character */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
+		47EC11832275FB8700A06AA3 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				47EC11842275FB8B00A06AA3 /* Repositories */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		47EC11842275FB8B00A06AA3 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		47EC11852275FBA300A06AA3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		47EC11862275FBB200A06AA3 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		47EC11872275FBB900A06AA3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
