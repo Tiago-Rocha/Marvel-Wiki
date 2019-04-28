@@ -54,7 +54,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
         return manager.request(URLString, method: method, parameters: parameters, encoding: encoding, headers: headers)
     }
 
-    override open func execute(_ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
+    override open func execute(_ completion: @escaping (_ response: Response<T>?, _ error: ErrorResponse?) -> Void) {
         let managerId:String = UUID().uuidString
         // Create a new manager for each request to customize its request header
         let manager = createSessionManager()
@@ -93,7 +93,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                     }
                     self.processRequest(request: upload, managerId, completion)
                 case .failure(let encodingError):
-                    completion(nil, ErrorResponse.error(415, nil, encodingError))
+                    completion(nil, ErrorResponse(415, nil, encodingError))
                 }
             })
         } else {
@@ -106,7 +106,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
     }
 
-    fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
+    fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: ErrorResponse?) -> Void) {
         if let credential = self.credential {
             request.authenticate(usingCredential: credential)
         }
@@ -125,7 +125,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                 if stringResponse.result.isFailure {
                     completion(
                         nil,
-                        ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.result.error as Error!)
+                        ErrorResponse(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.result.error)
                     )
                     return
                 }
@@ -182,9 +182,9 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                     )
 
                 } catch let requestParserError as DownloadException {
-                    completion(nil, ErrorResponse.error(400, dataResponse.data, requestParserError))
+                    completion(nil, ErrorResponse(400, dataResponse.data, requestParserError))
                 } catch let error {
-                    completion(nil, ErrorResponse.error(400, dataResponse.data, error))
+                    completion(nil, ErrorResponse(400, dataResponse.data, error))
                 }
                 return
             })
@@ -195,7 +195,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                 if voidResponse.result.isFailure {
                     completion(
                         nil,
-                        ErrorResponse.error(voidResponse.response?.statusCode ?? 500, voidResponse.data, voidResponse.result.error!)
+                        ErrorResponse(voidResponse.response?.statusCode ?? 500, voidResponse.data, voidResponse.result.error!)
                     )
                     return
                 }
@@ -214,7 +214,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                 if dataResponse.result.isFailure {
                     completion(
                         nil,
-                        ErrorResponse.error(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.result.error!)
+                        ErrorResponse(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.result.error!)
                     )
                     return
                 }
@@ -308,7 +308,7 @@ public enum AlamofireDecodableRequestBuilderError: Error {
 
 open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilder<T> {
 
-    override fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
+    override fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: ErrorResponse?) -> Void) {
         if let credential = self.credential {
             request.authenticate(usingCredential: credential)
         }
@@ -327,7 +327,7 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                 if stringResponse.result.isFailure {
                     completion(
                         nil,
-                        ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.result.error as Error!)
+                        ErrorResponse(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.result.error)
                     )
                     return
                 }
@@ -347,7 +347,7 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                 if voidResponse.result.isFailure {
                     completion(
                         nil,
-                        ErrorResponse.error(voidResponse.response?.statusCode ?? 500, voidResponse.data, voidResponse.result.error!)
+                        ErrorResponse(voidResponse.response?.statusCode ?? 500, voidResponse.data, voidResponse.result.error!)
                     )
                     return
                 }
@@ -366,7 +366,7 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                 if dataResponse.result.isFailure {
                     completion(
                         nil,
-                        ErrorResponse.error(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.result.error!)
+                        ErrorResponse(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.result.error!)
                     )
                     return
                 }
@@ -384,17 +384,17 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                 cleanupRequest()
 
                 guard dataResponse.result.isSuccess else {
-                    completion(nil, ErrorResponse.error(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.result.error!))
+                    completion(nil, ErrorResponse(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.result.error!))
                     return
                 }
 
                 guard let data = dataResponse.data, !data.isEmpty else {
-                    completion(nil, ErrorResponse.error(-1, nil, AlamofireDecodableRequestBuilderError.emptyDataResponse))
+                    completion(nil, ErrorResponse(-1, nil, AlamofireDecodableRequestBuilderError.emptyDataResponse))
                     return
                 }
 
                 guard let httpResponse = dataResponse.response else {
-                    completion(nil, ErrorResponse.error(-2, nil, AlamofireDecodableRequestBuilderError.nilHTTPResponse))
+                    completion(nil, ErrorResponse(-1, nil, AlamofireDecodableRequestBuilderError.nilHTTPResponse))
                     return
                 }
 
@@ -405,7 +405,11 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
                     responseObj = Response(response: httpResponse, body: decodeResult.decodableObj)
                 }
 
-                completion(responseObj, decodeResult.error)
+                if let _decodingError = decodeResult.error {
+                    completion(nil, ErrorResponse(-2, nil, _decodingError))
+                    return
+                }
+                completion(responseObj, decodeResult.error as? ErrorResponse)
             })
         }
     }

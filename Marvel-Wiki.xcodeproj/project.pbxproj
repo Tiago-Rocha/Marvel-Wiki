@@ -14,6 +14,15 @@
 		47EC116A2275FB7500A06AA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47EC11692275FB7500A06AA3 /* Assets.xcassets */; };
 		47EC116D2275FB7500A06AA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47EC116B2275FB7500A06AA3 /* LaunchScreen.storyboard */; };
 		47EC11782275FB7500A06AA3 /* Marvel_WikiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC11772275FB7500A06AA3 /* Marvel_WikiTests.swift */; };
+		47EC118F22760E6400A06AA3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC118E22760E6400A06AA3 /* Models.swift */; };
+		47EC119122760EA600A06AA3 /* JSONEncodingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC119022760EA600A06AA3 /* JSONEncodingHelper.swift */; };
+		47EC119322760EC700A06AA3 /* JSONEncodableEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC119222760EC700A06AA3 /* JSONEncodableEncoding.swift */; };
+		47EC119522760ECE00A06AA3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC119422760ECE00A06AA3 /* Extensions.swift */; };
+		47EC119722760ED900A06AA3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC119622760ED900A06AA3 /* Configuration.swift */; };
+		47EC119922760EDF00A06AA3 /* CodableHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC119822760EDF00A06AA3 /* CodableHelper.swift */; };
+		47EC119B22760EEE00A06AA3 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC119A22760EEE00A06AA3 /* APIs.swift */; };
+		47EC119D22760EF800A06AA3 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC119C22760EF800A06AA3 /* APIHelper.swift */; };
+		47EC119F22760F0300A06AA3 /* AlamofireImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC119E22760F0300A06AA3 /* AlamofireImplementations.swift */; };
 		C3592B443BE90F11D77199F7 /* Pods_Marvel_Wiki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 296B59102B2277E9E28C330A /* Pods_Marvel_Wiki.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +50,15 @@
 		47EC11732275FB7500A06AA3 /* Marvel-WikiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Marvel-WikiTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47EC11772275FB7500A06AA3 /* Marvel_WikiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marvel_WikiTests.swift; sourceTree = "<group>"; };
 		47EC11792275FB7500A06AA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47EC118E22760E6400A06AA3 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		47EC119022760EA600A06AA3 /* JSONEncodingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONEncodingHelper.swift; sourceTree = "<group>"; };
+		47EC119222760EC700A06AA3 /* JSONEncodableEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONEncodableEncoding.swift; sourceTree = "<group>"; };
+		47EC119422760ECE00A06AA3 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		47EC119622760ED900A06AA3 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		47EC119822760EDF00A06AA3 /* CodableHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableHelper.swift; sourceTree = "<group>"; };
+		47EC119A22760EEE00A06AA3 /* APIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
+		47EC119C22760EF800A06AA3 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
+		47EC119E22760F0300A06AA3 /* AlamofireImplementations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireImplementations.swift; sourceTree = "<group>"; };
 		7AF157F951AC4915D6048D98 /* Pods-Marvel-WikiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marvel-WikiTests.debug.xcconfig"; path = "Target Support Files/Pods-Marvel-WikiTests/Pods-Marvel-WikiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E624B2E71184D84304B5779 /* Pods-Marvel-Wiki.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marvel-Wiki.release.xcconfig"; path = "Target Support Files/Pods-Marvel-Wiki/Pods-Marvel-Wiki.release.xcconfig"; sourceTree = "<group>"; };
 		B2292B9DF60325E1498DEB30 /* Pods_Marvel_WikiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Marvel_WikiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,7 +101,6 @@
 				7AF157F951AC4915D6048D98 /* Pods-Marvel-WikiTests.debug.xcconfig */,
 				32D333465CCD6ACAAED16977 /* Pods-Marvel-WikiTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -110,11 +127,11 @@
 		47EC11612275FB7200A06AA3 /* Marvel-Wiki */ = {
 			isa = PBXGroup;
 			children = (
+				47EC118A2276017400A06AA3 /* UI */,
 				47EC11872275FBB900A06AA3 /* Extensions */,
 				47EC11862275FBB200A06AA3 /* DI */,
 				47EC11852275FBA300A06AA3 /* Services */,
 				47EC11832275FB8700A06AA3 /* Storage */,
-				47EC11822275FB8000A06AA3 /* Character */,
 				47EC11622275FB7200A06AA3 /* AppDelegate.swift */,
 				47EC11642275FB7200A06AA3 /* ViewController.swift */,
 				47EC11662275FB7200A06AA3 /* Main.storyboard */,
@@ -144,6 +161,7 @@
 		47EC11832275FB8700A06AA3 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				47EC11892276015A00A06AA3 /* Models */,
 				47EC11882275FBF100A06AA3 /* API */,
 				47EC11842275FB8B00A06AA3 /* Repositories */,
 			);
@@ -181,8 +199,48 @@
 		47EC11882275FBF100A06AA3 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				47EC11A022760F0600A06AA3 /* SwaggerGenerated */,
+				47EC118B22760DF500A06AA3 /* MarvelAPI */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		47EC11892276015A00A06AA3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		47EC118A2276017400A06AA3 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				47EC11822275FB8000A06AA3 /* Character */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		47EC118B22760DF500A06AA3 /* MarvelAPI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MarvelAPI;
+			sourceTree = "<group>";
+		};
+		47EC11A022760F0600A06AA3 /* SwaggerGenerated */ = {
+			isa = PBXGroup;
+			children = (
+				47EC119E22760F0300A06AA3 /* AlamofireImplementations.swift */,
+				47EC119C22760EF800A06AA3 /* APIHelper.swift */,
+				47EC118E22760E6400A06AA3 /* Models.swift */,
+				47EC119222760EC700A06AA3 /* JSONEncodableEncoding.swift */,
+				47EC119A22760EEE00A06AA3 /* APIs.swift */,
+				47EC119022760EA600A06AA3 /* JSONEncodingHelper.swift */,
+				47EC119422760ECE00A06AA3 /* Extensions.swift */,
+				47EC119622760ED900A06AA3 /* Configuration.swift */,
+				47EC119822760EDF00A06AA3 /* CodableHelper.swift */,
+			);
+			path = SwaggerGenerated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,8 +420,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47EC119322760EC700A06AA3 /* JSONEncodableEncoding.swift in Sources */,
 				47EC11652275FB7200A06AA3 /* ViewController.swift in Sources */,
 				47EC11632275FB7200A06AA3 /* AppDelegate.swift in Sources */,
+				47EC119122760EA600A06AA3 /* JSONEncodingHelper.swift in Sources */,
+				47EC118F22760E6400A06AA3 /* Models.swift in Sources */,
+				47EC119F22760F0300A06AA3 /* AlamofireImplementations.swift in Sources */,
+				47EC119722760ED900A06AA3 /* Configuration.swift in Sources */,
+				47EC119922760EDF00A06AA3 /* CodableHelper.swift in Sources */,
+				47EC119B22760EEE00A06AA3 /* APIs.swift in Sources */,
+				47EC119D22760EF800A06AA3 /* APIHelper.swift in Sources */,
+				47EC119522760ECE00A06AA3 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

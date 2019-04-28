@@ -6,11 +6,11 @@
 
 import Foundation
 
-open class SwaggerClientAPI {
-    open static var basePath = "http://gateway.marvel.com"
-    open static var credential: URLCredential?
-    open static var customHeaders: [String:String] = [:]
-    open static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
+public struct SwaggerClientAPI {
+    public var basePath = "http://gateway.marvel.com"
+    public let credential: URLCredential?
+    public let customHeaders: [String:String] = [:]
+    public let requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
 }
 
 open class RequestBuilder<T> {
@@ -30,8 +30,6 @@ open class RequestBuilder<T> {
         self.parameters = parameters
         self.isBody = isBody
         self.headers = headers
-
-        addHeaders(SwaggerClientAPI.customHeaders)
     }
 
     open func addHeaders(_ aHeaders:[String:String]) {
@@ -40,7 +38,7 @@ open class RequestBuilder<T> {
         }
     }
 
-    open func execute(_ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) { }
+    open func execute(_ completion: @escaping (_ response: Response<T>?, _ error: ErrorResponse?) -> Void) { }
 
     public func addHeader(name: String, value: String) -> Self {
         if !value.isEmpty {
@@ -49,8 +47,8 @@ open class RequestBuilder<T> {
         return self
     }
 
-    open func addCredential() -> Self {
-        self.credential = SwaggerClientAPI.credential
+    open func addCredential(credential: URLCredential) -> Self {
+        self.credential = credential
         return self
     }
 }
