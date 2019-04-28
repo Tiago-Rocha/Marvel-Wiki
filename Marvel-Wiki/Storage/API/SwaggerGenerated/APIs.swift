@@ -10,7 +10,6 @@ public struct SwaggerClientAPI {
     public var basePath = "http://gateway.marvel.com"
     public let credential: URLCredential?
     public let customHeaders: [String:String] = [:]
-    public let requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
 }
 
 open class RequestBuilder<T> {
