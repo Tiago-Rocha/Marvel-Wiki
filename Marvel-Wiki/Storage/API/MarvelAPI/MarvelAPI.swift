@@ -6,10 +6,13 @@ class MarvelAPI {
     
     private let factory: RequestBuilderFactory
     
-    public init(config: SwaggerClientAPI, factory: RequestBuilderFactory) {
+    private let authParams: MarvelAuthentication
+    
+    public init(config: SwaggerClientAPI, factory: RequestBuilderFactory, authentication: MarvelAuthentication) {
         
         self.config = config
         self.factory = factory
+        self.authParams = authentication
     }
     
     /**
@@ -38,7 +41,9 @@ class MarvelAPI {
         let URLString = config.basePath + path
         let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
+        var url = URLComponents(string: URLString)
+        
+       url?.queryItems?.append(contentsOf: authParams.urlQueryItems)
         
         let requestBuilder: RequestBuilder<CharacterDataWrapper>.Type = factory.getBuilder()
         
@@ -99,6 +104,9 @@ class MarvelAPI {
             "offset": offset?.encodeToJSON()
             ])
         
+        url?.queryItems?.append(contentsOf: authParams.urlQueryItems)
+        
+        print(url?.string)
         let requestBuilder: RequestBuilder<CharacterDataWrapper>.Type = factory.getBuilder()
         
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
