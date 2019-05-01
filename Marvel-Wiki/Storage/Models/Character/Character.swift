@@ -1,6 +1,7 @@
 import Foundation
 
 class Character {
+    
     var id: Int
     
     var name: String
@@ -11,7 +12,7 @@ class Character {
     
     var imageFormat: String?
     
-    init(id: Int, name: String, _ description: String?, _ imageURL: String?, _ imageFormat: String?) {
+    init(id: Int, name: String, _ description: String? = nil, _ imageURL: String? = nil, _ imageFormat: String? = nil) {
         
         self.id = id
         self.name = name
@@ -23,5 +24,20 @@ class Character {
     public static func builder() -> CharacterBuilder {
         
         return CharacterBuilder()
+    }
+}
+
+extension Character: Hashable {
+    
+    public var hashValue: Int {
+        return id
+    }
+    
+    static func == (lhs: Character, rhs: Character) -> Bool {
+        return lhs.id == rhs.id &&
+        lhs.name == lhs.name &&
+        lhs.description == rhs.description &&
+        lhs.imageFormat == rhs.imageFormat &&
+        lhs.imageURL == rhs.imageURL
     }
 }

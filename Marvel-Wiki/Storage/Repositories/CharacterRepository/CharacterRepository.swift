@@ -4,9 +4,12 @@ class CharacterRepository {
     
     private var characterList = [Character]()
     
-    private var currentOffset = 0
+    private var currentOffset: Int {
+        
+        return characterList.count
+    }
     
-    private var limit = 0
+    private var limit = 50
     
     func get(id: Int) -> Character? {
         
@@ -18,8 +21,13 @@ class CharacterRepository {
         return nil
     }
     
-    func getNewCharacters() -> [Character]? {
+    func fetchNewCharacters() -> [Character]? {
         
         return nil
+    }
+    
+    func getCachedCharacters() -> [Character] {
+        
+        return characterList
     }
 }
