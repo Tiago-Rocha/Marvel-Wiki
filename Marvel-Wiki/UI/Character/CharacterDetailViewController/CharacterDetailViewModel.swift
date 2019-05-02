@@ -28,7 +28,7 @@ struct CharacterDetailViewModel {
                 return nil
         }
         
-        return URL(string: _baseURL + "/portrait_large." + _imageFormat)
+        return URL(string: _baseURL + "/portrait_amazing." + _imageFormat)
     }
     
 }

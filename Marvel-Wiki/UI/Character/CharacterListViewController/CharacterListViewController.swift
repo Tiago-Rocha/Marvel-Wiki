@@ -16,6 +16,7 @@ class CharacterListViewController: UIViewController {
         
         setupCollectionView()
         setupBindings()
+        viewModel.fetchCharacters()
         super.viewDidLoad()
     }
     
@@ -23,11 +24,6 @@ class CharacterListViewController: UIViewController {
         
         self.viewModel = viewModel
         super.init(nibName: String(describing: type(of: self)), bundle: Bundle.main)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        viewModel.fetchCharacters()
-        super.viewDidAppear(animated)
     }
     
     required init?(coder aDecoder: NSCoder) {

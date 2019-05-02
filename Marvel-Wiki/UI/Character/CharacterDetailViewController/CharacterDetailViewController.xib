@@ -1,13 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CharacterDetailViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CharacterDetailViewController" customModule="Marvel_Wiki" customModuleProvider="target">
             <connections>
+                <outlet property="descriptionLabel" destination="iBH-fh-Waf" id="8ck-vB-rsS"/>
+                <outlet property="imageView" destination="p0d-yi-DaO" id="eB4-9e-lRw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,7 +21,40 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLY-dd-wt6">
+                    <rect key="frame" x="0.0" y="10" width="375" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p0d-yi-DaO">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="367"/>
+                            <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBH-fh-Waf">
+                            <rect key="frame" x="12" y="379" width="351" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="p0d-yi-DaO" secondAttribute="trailing" id="30N-PG-uF1"/>
+                        <constraint firstItem="p0d-yi-DaO" firstAttribute="leading" secondItem="OLY-dd-wt6" secondAttribute="leading" id="IEI-gT-8Uy"/>
+                        <constraint firstAttribute="trailing" secondItem="iBH-fh-Waf" secondAttribute="trailing" constant="12" id="M5b-SN-CLJ"/>
+                        <constraint firstItem="iBH-fh-Waf" firstAttribute="leading" secondItem="OLY-dd-wt6" secondAttribute="leading" constant="12" id="dFQ-E0-mEb"/>
+                        <constraint firstItem="p0d-yi-DaO" firstAttribute="top" secondItem="OLY-dd-wt6" secondAttribute="top" id="fN5-L9-FnT"/>
+                        <constraint firstItem="iBH-fh-Waf" firstAttribute="top" secondItem="p0d-yi-DaO" secondAttribute="bottom" constant="12" id="kRO-2L-yWT"/>
+                        <constraint firstItem="p0d-yi-DaO" firstAttribute="height" secondItem="OLY-dd-wt6" secondAttribute="height" multiplier="0.55" id="mHh-sA-NCw"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="OLY-dd-wt6" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="0qI-8x-TO8"/>
+                <constraint firstItem="OLY-dd-wt6" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="5tc-WH-WpV"/>
+                <constraint firstItem="OLY-dd-wt6" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="gjA-Bw-no1"/>
+                <constraint firstItem="OLY-dd-wt6" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="qc3-xC-nuP"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>
