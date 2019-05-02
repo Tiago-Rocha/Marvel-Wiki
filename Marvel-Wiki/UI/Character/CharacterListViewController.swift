@@ -1,27 +1,58 @@
 import UIKit
 import RxSwift
+import RxCocoa
 
 class CharacterListViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     private let viewModel: CharacterListViewModel
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         
         setupCollectionView()
+        setupBindings()
         super.viewDidLoad()
     }
     
     init(viewModel: CharacterListViewModel) {
         
         self.viewModel = viewModel
-        viewModel.fetchCharacters()
         super.init(nibName: String(describing: type(of: self)), bundle: Bundle.main)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.fetchCharacters()
+        super.viewDidAppear(animated)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupBindings() {
+        
+        searchBar.rx.text
+            .distinctUntilChanged()
+            .debounce(0.3, scheduler: MainScheduler.instance)
+            .subscribe ({ [unowned self] (query) in
+                
+                self.viewModel.searchCharacterWith(value: query.element as? String)
+            })
+            .disposed(by: self.disposeBag)
+        
+        viewModel
+            .newElements
+            .observeOn(MainScheduler.instance)
+            .subscribe { [unowned self] _ in
+                self.collectionView
+                    .reloadSections(NSIndexSet(index: 0) as IndexSet)
+            }
+            .disposed(by: self.disposeBag)
     }
     
     func setupCollectionView() {
