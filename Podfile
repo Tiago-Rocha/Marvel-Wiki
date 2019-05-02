@@ -6,8 +6,10 @@ target 'Marvel-Wiki' do
   
   pod 'Alamofire', '4.8.2'
   pod 'RxSwift', '4.5.0'
+  pod 'RxCocoa', '4.5.0'
   pod 'Kingfisher', '5.3.1'
   pod 'CryptoSwift', '1.0.0'
+  
 end
 
 # Pods for Marvel-Wiki
