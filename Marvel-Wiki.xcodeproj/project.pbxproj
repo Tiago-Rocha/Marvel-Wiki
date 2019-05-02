@@ -10,6 +10,9 @@
 		14C931A8080A0121C1ADADD3 /* Pods_Marvel_WikiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A1FD91C326100EC991A7C1 /* Pods_Marvel_WikiTests.framework */; };
 		19BF17C3227AE4D4002B76D9 /* CharacterRepositoryObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF17C2227AE4D4002B76D9 /* CharacterRepositoryObserver.swift */; };
 		19BF17C5227AF0DF002B76D9 /* DependencyGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF17C4227AF0DF002B76D9 /* DependencyGraph.swift */; };
+		19BF17C9227B35F8002B76D9 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF17C7227B35F8002B76D9 /* CharacterDetailViewController.swift */; };
+		19BF17CA227B35F8002B76D9 /* CharacterDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19BF17C8227B35F8002B76D9 /* CharacterDetailViewController.xib */; };
+		19BF17CC227B3C3F002B76D9 /* CharacterDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF17CB227B3C3F002B76D9 /* CharacterDetailViewModel.swift */; };
 		477FE7CC22765FB6000D3D52 /* CharacterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477FE7CB22765FB6000D3D52 /* CharacterRepository.swift */; };
 		477FE7CE227660FE000D3D52 /* MarvelAPIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477FE7CD227660FE000D3D52 /* MarvelAPIKeys.swift */; };
 		477FE7D42278FEBB000D3D52 /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477FE7D32278FEBB000D3D52 /* CharacterListViewModel.swift */; };
@@ -88,6 +91,9 @@
 /* Begin PBXFileReference section */
 		19BF17C2227AE4D4002B76D9 /* CharacterRepositoryObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRepositoryObserver.swift; sourceTree = "<group>"; };
 		19BF17C4227AF0DF002B76D9 /* DependencyGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DependencyGraph.swift; path = "Marvel-Wiki/Storage/Repositories/CharacterRepository/DependencyGraph.swift"; sourceTree = SOURCE_ROOT; };
+		19BF17C7227B35F8002B76D9 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
+		19BF17C8227B35F8002B76D9 /* CharacterDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterDetailViewController.xib; sourceTree = "<group>"; };
+		19BF17CB227B3C3F002B76D9 /* CharacterDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewModel.swift; sourceTree = "<group>"; };
 		25A1FD91C326100EC991A7C1 /* Pods_Marvel_WikiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Marvel_WikiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DA800CBA144951AD33067D3 /* Pods-Marvel-WikiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marvel-WikiTests.release.xcconfig"; path = "Target Support Files/Pods-Marvel-WikiTests/Pods-Marvel-WikiTests.release.xcconfig"; sourceTree = "<group>"; };
 		477FE7CB22765FB6000D3D52 /* CharacterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRepository.swift; sourceTree = "<group>"; };
@@ -191,6 +197,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		19BF17C6227B35D5002B76D9 /* CharacterDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				19BF17C7227B35F8002B76D9 /* CharacterDetailViewController.swift */,
+				19BF17C8227B35F8002B76D9 /* CharacterDetailViewController.xib */,
+				19BF17CB227B3C3F002B76D9 /* CharacterDetailViewModel.swift */,
+			);
+			path = CharacterDetailViewController;
+			sourceTree = "<group>";
+		};
 		3FD3AFEFB425ADEA13CE827B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,7 +261,6 @@
 			isa = PBXGroup;
 			children = (
 				47EC118A2276017400A06AA3 /* UI */,
-				47EC11872275FBB900A06AA3 /* Extensions */,
 				47EC11862275FBB200A06AA3 /* DI */,
 				47EC11852275FBA300A06AA3 /* Services */,
 				47EC11832275FB8700A06AA3 /* Storage */,
@@ -271,6 +286,7 @@
 		47EC11822275FB8000A06AA3 /* Character */ = {
 			isa = PBXGroup;
 			children = (
+				19BF17C6227B35D5002B76D9 /* CharacterDetailViewController */,
 				477FE7D92278FF4B000D3D52 /* CharacterCell */,
 				477FE7D32278FEBB000D3D52 /* CharacterListViewModel.swift */,
 				477FE7D52278FED0000D3D52 /* CharacterListViewController.swift */,
@@ -310,13 +326,6 @@
 				19BF17C4227AF0DF002B76D9 /* DependencyGraph.swift */,
 			);
 			path = DI;
-			sourceTree = "<group>";
-		};
-		47EC11872275FBB900A06AA3 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		47EC11882275FBF100A06AA3 /* API */ = {
@@ -511,6 +520,7 @@
 				47EC116D2275FB7500A06AA3 /* LaunchScreen.storyboard in Resources */,
 				47EC116A2275FB7500A06AA3 /* Assets.xcassets in Resources */,
 				47EC11682275FB7200A06AA3 /* Main.storyboard in Resources */,
+				19BF17CA227B35F8002B76D9 /* CharacterDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +623,7 @@
 				47EC11E1227614CF00A06AA3 /* ComicSummary.swift in Sources */,
 				47EC11C8227614CF00A06AA3 /* SeriesList.swift in Sources */,
 				47EC11CB227614CF00A06AA3 /* Story.swift in Sources */,
+				19BF17C9227B35F8002B76D9 /* CharacterDetailViewController.swift in Sources */,
 				47EC11E9227614CF00A06AA3 /* StoryList.swift in Sources */,
 				47EC11CE227614CF00A06AA3 /* Event.swift in Sources */,
 				47EC11CC227614CF00A06AA3 /* StorySummary.swift in Sources */,
@@ -661,6 +672,7 @@
 				477FE7CC22765FB6000D3D52 /* CharacterRepository.swift in Sources */,
 				47EC11DE227614CF00A06AA3 /* CharacterDataWrapper.swift in Sources */,
 				47EC11D3227614CF00A06AA3 /* CharacterDataContainer.swift in Sources */,
+				19BF17CC227B3C3F002B76D9 /* CharacterDetailViewModel.swift in Sources */,
 				47EC11D4227614CF00A06AA3 /* ComicList.swift in Sources */,
 				19BF17C5227AF0DF002B76D9 /* DependencyGraph.swift in Sources */,
 			);
