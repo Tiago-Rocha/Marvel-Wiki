@@ -76,6 +76,11 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
             fatalError("Couldn'tdequeue cell")
         }
         cell.viewModel = viewModel.getCharacterCellViewModel(for: indexPath.row)
+        
+        if indexPath.row == viewModel.numberOfCells - 1 {
+            viewModel.fetchCharacters()
+        }
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
