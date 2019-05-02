@@ -18,7 +18,7 @@ struct CharacterCellViewModel {
                 return nil
         }
         
-        return URL(string: _baseURL + "/landscape_large." + _imageFormat)
+        return URL(string: _baseURL + "/landscape_amazing." + _imageFormat)
     }
     
     var characterName: String {

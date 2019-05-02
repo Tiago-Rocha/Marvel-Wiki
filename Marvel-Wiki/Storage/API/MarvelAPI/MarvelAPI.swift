@@ -28,10 +28,10 @@ class MarvelAPI {
     }
     
     /**
-    - parameter characterId: (path) A single character id.
-    
-    - returns: RequestBuilder<CharacterDataWrapper>
-    */
+     - parameter characterId: (path) A single character id.
+     
+     - returns: RequestBuilder<CharacterDataWrapper>
+     */
     public func getCharacterIndividualWithRequestBuilder(characterId: Int) -> RequestBuilder<CharacterDataWrapper> {
         var path = "/v1/public/characters/{characterId}"
         let characterIdPreEscape = "\(characterId)"
@@ -43,7 +43,9 @@ class MarvelAPI {
         
         var url = URLComponents(string: URLString)
         
-       url?.queryItems?.append(contentsOf: authParams.urlQueryItems)
+        url?.queryItems = []
+        
+        url?.queryItems?.append(contentsOf: authParams.urlQueryItems)
         
         let requestBuilder: RequestBuilder<CharacterDataWrapper>.Type = factory.getBuilder()
         
@@ -72,19 +74,19 @@ class MarvelAPI {
     }
     
     /**
-    - parameter name: (query) Return only characters matching the specified full character name (e.g. Spider-Man). (optional)
-    - parameter nameStartsWith: (query) Return characters with names that begin with the specified string (e.g. Sp). (optional)
-    - parameter modifiedSince: (query) Return only characters which have been modified since the specified date. (optional)
-    - parameter comics: (query) Return only characters which appear in the specified comics (accepts a comma-separated list of ids). (optional)
-    - parameter series: (query) Return only characters which appear the specified series (accepts a comma-separated list of ids). (optional)
-    - parameter events: (query) Return only characters which appear in the specified events (accepts a comma-separated list of ids). (optional)
-    - parameter stories: (query) Return only characters which appear the specified stories (accepts a comma-separated list of ids). (optional)
-    - parameter orderBy: (query) Order the result set by a field or fields. Add a \&quot;-\&quot; to the value sort in descending order. Multiple values are given priority in the order in which they are passed. (optional)
-    - parameter limit: (query) Limit the result set to the specified number of resources. (optional)
-    - parameter offset: (query) Skip the specified number of resources in the result set. (optional)
-    
-    - returns: RequestBuilder<CharacterDataWrapper>
-    */
+     - parameter name: (query) Return only characters matching the specified full character name (e.g. Spider-Man). (optional)
+     - parameter nameStartsWith: (query) Return characters with names that begin with the specified string (e.g. Sp). (optional)
+     - parameter modifiedSince: (query) Return only characters which have been modified since the specified date. (optional)
+     - parameter comics: (query) Return only characters which appear in the specified comics (accepts a comma-separated list of ids). (optional)
+     - parameter series: (query) Return only characters which appear the specified series (accepts a comma-separated list of ids). (optional)
+     - parameter events: (query) Return only characters which appear in the specified events (accepts a comma-separated list of ids). (optional)
+     - parameter stories: (query) Return only characters which appear the specified stories (accepts a comma-separated list of ids). (optional)
+     - parameter orderBy: (query) Order the result set by a field or fields. Add a \&quot;-\&quot; to the value sort in descending order. Multiple values are given priority in the order in which they are passed. (optional)
+     - parameter limit: (query) Limit the result set to the specified number of resources. (optional)
+     - parameter offset: (query) Skip the specified number of resources in the result set. (optional)
+     
+     - returns: RequestBuilder<CharacterDataWrapper>
+     */
     public func getCreatorCollectionWithRequestBuilder(name: String? = nil, nameStartsWith: String? = nil, modifiedSince: Date? = nil, comics: [Int]? = nil, series: [Int]? = nil, events: [Int]? = nil, stories: [Int]? = nil, orderBy: [String]? = nil, limit: Int? = nil, offset: Int? = nil) -> RequestBuilder<CharacterDataWrapper> {
         let path = "/v1/public/characters"
         let URLString = config.basePath + path
@@ -106,7 +108,6 @@ class MarvelAPI {
         
         url?.queryItems?.append(contentsOf: authParams.urlQueryItems)
         
-        print(url?.string)
         let requestBuilder: RequestBuilder<CharacterDataWrapper>.Type = factory.getBuilder()
         
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)

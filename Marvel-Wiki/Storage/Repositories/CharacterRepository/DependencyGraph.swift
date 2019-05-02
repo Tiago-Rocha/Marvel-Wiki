@@ -2,7 +2,7 @@ import Foundation
 
 class DependencyGraph {
     
-    var characterRepository: CharacterRepository?
+    private var characterRepository: CharacterRepository?
     
     static let shared = DependencyGraph()
     

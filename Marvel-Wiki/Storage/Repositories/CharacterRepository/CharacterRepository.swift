@@ -2,7 +2,7 @@ import Foundation
 
 class CharacterRepository {
     
-    private var observers = [CharacterRepositoryObserver]()
+    var observers = [CharacterRepositoryObserver]()
     
     private var characterList = [Character]()
     
@@ -19,9 +19,22 @@ class CharacterRepository {
     
     private var limit = 50
     
-    func get(id: Int) -> Character? {
+    func get(id: Int) {
         
-        return nil
+        marvelAPI.getCharacterIndividual(characterId: id) { data, error in
+            
+            guard let _dtoCharacter = data?.data?.results?.first else {
+                self.errorSignal(message: String(error?.localizedDescription ?? "Failed to load character"))
+                return
+            }
+        
+            guard let character = try? Character.builder().with(character: _dtoCharacter).build() else {
+                self.errorSignal(message: "Builder error")
+                return
+            }
+         
+            self.got(character: character)
+        }
     }
     
     func search(value: String) {
@@ -105,6 +118,14 @@ extension CharacterRepository {
         for observer in observers {
             
             observer.search(characters)
+        }
+    }
+    
+    func got(character: Character) {
+        
+        for observer in observers {
+            
+            observer.fetched(character)
         }
     }
 }

@@ -53,6 +53,19 @@ class CharacterListViewController: UIViewController {
                     .reloadSections(NSIndexSet(index: 0) as IndexSet)
             }
             .disposed(by: self.disposeBag)
+        
+        
+        viewModel
+            .specificElement
+            .observeOn(MainScheduler.instance)
+            .subscribe { [unowned self] vm in
+                guard let viewModel = vm.element else { return}
+                
+                let vc = CharacterDetailViewController(viewModel: viewModel)
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+            .disposed(by: self.disposeBag)
     }
     
     func setupCollectionView() {
@@ -73,7 +86,7 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterListCell", for: indexPath) as? CharacterListCell else {
-            fatalError("Couldn'tdequeue cell")
+            fatalError("Couldn't dequeue cell")
         }
         cell.viewModel = viewModel.getCharacterCellViewModel(for: indexPath.row)
         
@@ -84,12 +97,13 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.getCharacterDetailsOn(position: indexPath.row)
     }
 }
 
 extension CharacterListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height / 5)
+        return CGSize(width: view.frame.width, height: view.frame.height / 3)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets.zero

@@ -1,6 +1,6 @@
 import Foundation
 
-class CharacterBuilder {
+public class CharacterBuilder {
 
     var id: Int?
     

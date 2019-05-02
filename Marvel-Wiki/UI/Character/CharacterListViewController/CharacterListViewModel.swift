@@ -5,6 +5,8 @@ class CharacterListViewModel {
     
     var newElements = PublishSubject<Bool>()
     
+    var specificElement = PublishSubject<CharacterDetailViewModel>()
+    
     private var characters = [Character]() {
         didSet {
             newElements.onNext(true)
@@ -29,6 +31,7 @@ class CharacterListViewModel {
     var numberOfCells: Int {
         return characters.count
     }
+    
     func searchCharacterWith(value: String?) {
         
         guard let _query = value else {
@@ -36,6 +39,12 @@ class CharacterListViewModel {
             return
         }
         _query.isEmpty ? resetCachedCharacters() : repository.search(value: _query)
+    }
+    
+    func getCharacterDetailsOn(position: Int) {
+    
+        
+        repository.get(id: characters[position].id)
     }
     
     func resetCachedCharacters() {
@@ -52,6 +61,11 @@ class CharacterListViewModel {
     }
 }
 extension CharacterListViewModel: CharacterRepositoryObserver {
+    
+    func fetched(_ character: Character) {
+        self.specificElement.onNext(CharacterDetailViewModel(character: character))
+    }
+    
     func fetched(_ characters: [Character]) {
         self.characters.append(contentsOf: characters)
     }

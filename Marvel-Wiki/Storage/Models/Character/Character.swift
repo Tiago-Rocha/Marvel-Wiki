@@ -1,6 +1,6 @@
 import Foundation
 
-class Character {
+public class Character {
     
     var id: Int
     
@@ -33,7 +33,7 @@ extension Character: Hashable {
         return id
     }
     
-    static func == (lhs: Character, rhs: Character) -> Bool {
+    public static func == (lhs: Character, rhs: Character) -> Bool {
         return lhs.id == rhs.id &&
         lhs.name == lhs.name &&
         lhs.description == rhs.description &&
