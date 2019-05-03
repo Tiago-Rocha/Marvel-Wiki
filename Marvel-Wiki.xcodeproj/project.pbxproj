@@ -14,7 +14,6 @@
 		19BF17CA227B35F8002B76D9 /* CharacterDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19BF17C8227B35F8002B76D9 /* CharacterDetailViewController.xib */; };
 		19BF17CC227B3C3F002B76D9 /* CharacterDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF17CB227B3C3F002B76D9 /* CharacterDetailViewModel.swift */; };
 		19BF17D0227B3EA6002B76D9 /* CharacterRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF17CF227B3EA6002B76D9 /* CharacterRepositoryTests.swift */; };
-		19BF17D2227B3EB4002B76D9 /* CharacterListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF17D1227B3EB4002B76D9 /* CharacterListViewModelTests.swift */; };
 		19BF17D6227B67E9002B76D9 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF17D5227B67E9002B76D9 /* UIViewControllerExt.swift */; };
 		19BF17D8227B7039002B76D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19BF17D7227B7038002B76D9 /* Main.storyboard */; };
 		19BF17DA227B705A002B76D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BF17D9227B705A002B76D9 /* ViewController.swift */; };
@@ -98,7 +97,6 @@
 		19BF17C8227B35F8002B76D9 /* CharacterDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterDetailViewController.xib; sourceTree = "<group>"; };
 		19BF17CB227B3C3F002B76D9 /* CharacterDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewModel.swift; sourceTree = "<group>"; };
 		19BF17CF227B3EA6002B76D9 /* CharacterRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRepositoryTests.swift; sourceTree = "<group>"; };
-		19BF17D1227B3EB4002B76D9 /* CharacterListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModelTests.swift; sourceTree = "<group>"; };
 		19BF17D5227B67E9002B76D9 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		19BF17D7227B7038002B76D9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		19BF17D9227B705A002B76D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Storage/ViewController.swift; sourceTree = "<group>"; };
@@ -303,7 +301,6 @@
 			children = (
 				47EC11792275FB7500A06AA3 /* Info.plist */,
 				19BF17CF227B3EA6002B76D9 /* CharacterRepositoryTests.swift */,
-				19BF17D1227B3EB4002B76D9 /* CharacterListViewModelTests.swift */,
 				19BF17DB227C801F002B76D9 /* CharacterBuilderTests.swift */,
 			);
 			path = "Marvel-WikiTests";
@@ -701,7 +698,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				19BF17DC227C8020002B76D9 /* CharacterBuilderTests.swift in Sources */,
-				19BF17D2227B3EB4002B76D9 /* CharacterListViewModelTests.swift in Sources */,
 				19BF17D0227B3EA6002B76D9 /* CharacterRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

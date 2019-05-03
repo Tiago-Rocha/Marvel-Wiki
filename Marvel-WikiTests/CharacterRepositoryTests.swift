@@ -15,59 +15,46 @@ class CharacterRepositoryTests: XCTestCase {
         characterRepository.add(observer: observer!)
     }
     
-    //Test observer setup
-    
-    func testObserverSetup() {
-        
-        XCTAssertEqual(characterRepository.observers.count, 1)
-    }
-    
     func testSearchSignal() {
         
-        characterRepository.notifySearch()
+       characterRepository.search(value: "")
+        
+        characterRepository.pubSearched(characters: [Character]())
         
         XCTAssertTrue(observer!.searched)        
     }
     
     func testFailSignal() {
         
-        characterRepository.notifyFail()
+        characterRepository.pubError(message: "")
         
-        XCTAssert(observer!.failed)
+        XCTAssertTrue(observer!.failed)
     }
     
     func testFetchSignal() {
         
-        characterRepository.notifyFetch()
+        characterRepository.pubFetched(characters: [Character]())
         
-        XCTAssert(observer!.fetched)
+        XCTAssertTrue(observer!.fetched)
     }
     
+    func testRemoveObserver() {
+        
+        characterRepository.remove(observer: observer!)
+        
+        characterRepository.pubSearched(characters: [Character]())
+        
+        XCTAssertFalse(observer!.searched)
+    }
+}
 
-}
-fileprivate extension CharacterRepository
-{
-    fileprivate func notifySearch() {
-        for observer in observers {
-            observer.search([Marvel_Wiki.Character]())
-        }
-    }
-    
-    fileprivate func notifyFail() {
-        for observer in observers {
-            observer.failedWith(message: "")
-        }
-    }
-    
-    fileprivate func notifyFetch() {
-        for observer in observers {
-            observer.fetched([Marvel_Wiki.Character]())
-        }
-    }
-}
 class CharacterRepositoryObserverMock: CharacterRepositoryObserver {
     
+    typealias Character = Marvel_Wiki.Character
+    
     public var fetched = false
+    
+    public var fetchedSingleCharacter = false
     
     public var failed = false
     
@@ -75,15 +62,23 @@ class CharacterRepositoryObserverMock: CharacterRepositoryObserver {
     
     init() {}
     
-    func fetched(_ characters: [Marvel_Wiki.Character]) {
+    func fetched(_ character: Character) {
+    
+        fetchedSingleCharacter = true
+    }
+    
+    func fetched(_ characters: [Character]) {
+        
         fetched = true
     }
     
     func failedWith(message: String) {
+        
         failed = true
     }
     
-    func search(_ characters: [Marvel_Wiki.Character]) {
+    func search(_ characters: [Character]) {
+        
         searched = true
     }
 }
