@@ -68,6 +68,6 @@ public class CharacterBuilder {
     }
 }
 
-public enum BuilderError: Error {
+public enum BuilderError: Error, Equatable {
     case fieldNotSet(String)
 }
