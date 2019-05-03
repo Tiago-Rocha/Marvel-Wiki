@@ -34,6 +34,7 @@ class CharacterListViewModel {
     }
     
     var numberOfCells: Int {
+        
         return characters.count
     }
     
@@ -47,17 +48,18 @@ class CharacterListViewModel {
     }
     
     func getCharacterDetailsOn(position: Int) {
-    
         
         repository.get(id: characters[position].id)
     }
     
     func resetCachedCharacters() {
+        
         characters = repository.getCachedCharacters()
     }
     
     func fetchCharacters() {
-        repository.fetchNewCharacters()
+        
+        repository.fetchCharacters()
     }
     
     func getCharacterCellViewModel(for row: Int) -> CharacterCellViewModel? {
@@ -68,18 +70,21 @@ class CharacterListViewModel {
 extension CharacterListViewModel: CharacterRepositoryObserver {
     
     func fetched(_ character: Character) {
+        
         self.specificElement.onNext(CharacterDetailViewModel(character: character))
     }
     
     func fetched(_ characters: [Character]) {
+        
         self.characters.append(contentsOf: characters)
     }
     
     func search(_ characters: [Character]) {
+        
         self.characters = characters
     }
     
     func failedWith(message: String) {
-        print(message)
+        //TODO: Implement ErroView binding
     }
 }
