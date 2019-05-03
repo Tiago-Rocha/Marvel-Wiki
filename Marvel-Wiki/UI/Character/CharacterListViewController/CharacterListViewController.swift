@@ -6,17 +6,21 @@ class CharacterListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    private lazy var searchBar = UISearchBar()
     
     private let viewModel: CharacterListViewModel
     
     var disposeBag = DisposeBag()
     
+    var isSearching = false
+    
+    var isFetching = false
+    
     override func viewDidLoad() {
         
+        setupSearchBar()
         setupCollectionView()
         setupBindings()
-        viewModel.fetchCharacters()
         super.viewDidLoad()
     }
     
@@ -30,6 +34,13 @@ class CharacterListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupSearchBar() {
+        
+        searchBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 56)
+        searchBar.placeholder = "Explore the Marvel World"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchBar)
+    }
+    
     func setupBindings() {
         
         searchBar.rx.text
@@ -37,6 +48,11 @@ class CharacterListViewController: UIViewController {
             .debounce(0.3, scheduler: MainScheduler.instance)
             .subscribe ({ [unowned self] (query) in
                 
+                if let _emptyQuery  = (query.element as? String)?.isEmpty {
+                    self.isSearching = !_emptyQuery
+                } else {
+                    self.isSearching = false
+                }
                 self.viewModel.searchCharacterWith(value: query.element as? String)
             })
             .disposed(by: self.disposeBag)
@@ -45,6 +61,7 @@ class CharacterListViewController: UIViewController {
             .newElements
             .observeOn(MainScheduler.instance)
             .subscribe { [unowned self] _ in
+                self.isFetching = false
                 self.collectionView
                     .reloadSections(NSIndexSet(index: 0) as IndexSet)
             }
@@ -74,9 +91,11 @@ class CharacterListViewController: UIViewController {
 extension CharacterListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return viewModel.numberOfCells
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -86,13 +105,10 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
         }
         cell.viewModel = viewModel.getCharacterCellViewModel(for: indexPath.row)
         
-        if indexPath.row == viewModel.numberOfCells - 1 {
-            viewModel.fetchCharacters()
-        }
-        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         viewModel.getCharacterDetailsOn(position: indexPath.row)
     }
 }
@@ -106,5 +122,14 @@ extension CharacterListViewController: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        if scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.bounds.height) - 20 {
+            if !isFetching && !isSearching {
+                viewModel.fetchCharacters()
+            }
+        }
     }
 }

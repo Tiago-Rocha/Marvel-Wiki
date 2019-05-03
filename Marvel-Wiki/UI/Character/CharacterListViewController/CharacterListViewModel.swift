@@ -24,8 +24,13 @@ class CharacterListViewModel {
     init(characterRepository: CharacterRepository) {
         
         self.repository = characterRepository
-        self.characters.append(contentsOf: characterRepository.getCachedCharacters())
         repository.add(observer: self)
+        let characters = characterRepository.getCachedCharacters()
+        if characters.isEmpty {
+            fetchCharacters()
+        } else {
+            self.characters.append(contentsOf: characters)
+        }
     }
     
     var numberOfCells: Int {
