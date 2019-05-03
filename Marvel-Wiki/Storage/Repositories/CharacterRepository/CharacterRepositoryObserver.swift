@@ -1,6 +1,6 @@
 import Foundation
 
-protocol CharacterRepositoryObserver: class {
+public protocol CharacterRepositoryObserver: class {
     
     func fetched(_ characters: [Character])
     

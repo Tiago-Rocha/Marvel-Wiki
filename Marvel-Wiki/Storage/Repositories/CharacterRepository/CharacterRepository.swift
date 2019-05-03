@@ -2,7 +2,7 @@ import Foundation
 
 class CharacterRepository {
     
-    var observers = [CharacterRepositoryObserver]()
+    private var observers = NSHashTable<AnyObject>.weakObjects()
     
     private var characterList = [Character]()
     
@@ -24,16 +24,16 @@ class CharacterRepository {
         marvelAPI.getCharacterIndividual(characterId: id) { data, error in
             
             guard let _dtoCharacter = data?.data?.results?.first else {
-                self.errorSignal(message: String(error?.localizedDescription ?? "Failed to load character"))
+                self.pubError(message: String(error?.localizedDescription ?? "Failed to load character"))
                 return
             }
         
             guard let character = try? Character.builder().with(character: _dtoCharacter).build() else {
-                self.errorSignal(message: "Builder error")
+                self.pubError(message: "Builder error")
                 return
             }
          
-            self.got(character: character)
+            self.pubFetched(character: character)
         }
     }
     
@@ -44,7 +44,7 @@ class CharacterRepository {
         marvelAPI.getCreatorCollection(name: nil, nameStartsWith: value, modifiedSince: nil, comics: nil, series: nil, events: nil, stories: nil, orderBy: nil, limit: nil, offset: nil) { data, error in
             
             guard let _dtoCharacters = data?.data?.results else {
-                self.errorSignal(message: String(error?.localizedDescription ?? "Generic Error"))
+                self.pubError(message: String(error?.localizedDescription ?? "Generic Error"))
                 return
             }
             
@@ -52,22 +52,22 @@ class CharacterRepository {
                 do {
                     searchedCharacters.append(try Character.builder().with(character: modelCharacter).build())
                 }
-                catch let error {
+                catch let _ {
                     //Log Error
                 }
             }
             
-            self.searched(characters: searchedCharacters)
+            self.pubSearched(characters: searchedCharacters)
         }
     }
     
-    func fetchNewCharacters() {
+    func fetchCharacters() {
         
         var fetchedCharacters = [Character]()
         marvelAPI.getCreatorCollection(name: nil, nameStartsWith: nil, modifiedSince: nil, comics: nil, series: nil, events: nil, stories: nil, orderBy: nil, limit: nil, offset: characterList.count) { data, error in
             
             guard let _dtoCharacters = data?.data?.results else {
-                self.errorSignal(message: String(error?.localizedDescription ?? "Generic Error"))
+                self.pubError(message: String(error?.localizedDescription ?? "Generic Error"))
                 return
             }
             
@@ -75,12 +75,12 @@ class CharacterRepository {
                 do {
                     fetchedCharacters.append(try Character.builder().with(character: modelCharacter).build())
                 }
-                catch let error {
+                catch _ {
                     //Log Error
                 }
             }
             self.characterList.append(contentsOf: fetchedCharacters)
-            self.new(characters: fetchedCharacters)
+            self.pubFetched(characters: fetchedCharacters)
         }
     }
     
@@ -90,42 +90,46 @@ class CharacterRepository {
     }
     
     deinit {
-        observers.removeAll()
+        observers.removeAllObjects()
     }
 }
 extension CharacterRepository {
     
     func add(observer: CharacterRepositoryObserver) {
-        self.observers.append(observer)
-    }
-    
-    func new(characters: [Character]) {
         
-        for observer in observers {
-            
-            observer.fetched(characters)
-        }
+        observers.add(observer)
     }
     
-    func errorSignal(message: String) {
-        for observer in observers {
-            
-            observer.failedWith(message: message)
-        }
-    }
-    
-    func searched(characters: [Character]) {
-        for observer in observers {
-            
-            observer.search(characters)
-        }
-    }
-    
-    func got(character: Character) {
+    func remove(observer: CharacterRepositoryObserver) {
         
-        for observer in observers {
-            
-            observer.fetched(character)
+        observers.remove(observer)
+    }
+    
+    func pubFetched(characters: [Character]) {
+        
+        for observer in observers.allObjects {
+            (observer as? CharacterRepositoryObserver)?.fetched(characters)
+        }
+    }
+    
+    func pubError(message: String) {
+        
+        for observer in observers.allObjects {
+            (observer as? CharacterRepositoryObserver)?.failedWith(message: message)
+        }
+    }
+    
+    func pubSearched(characters: [Character]) {
+        
+        for observer in observers.allObjects {
+            (observer as? CharacterRepositoryObserver)?.search(characters)
+        }
+    }
+    
+    func pubFetched(character: Character) {
+        
+        for observer in observers.allObjects {
+            (observer as? CharacterRepositoryObserver)?.fetched(character)
         }
     }
 }
