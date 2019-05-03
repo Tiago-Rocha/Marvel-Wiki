@@ -9,11 +9,10 @@ class CharacterDetailViewController: UIViewController {
     private let viewModel: CharacterDetailViewModel
     
     override func viewDidLoad() {
+        
         setupLayout()
-        self.title = viewModel.name
+        
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     init(viewModel: CharacterDetailViewModel) {
@@ -28,7 +27,7 @@ class CharacterDetailViewController: UIViewController {
     
     func setupLayout() {
         
-        self.navigationController?.title = viewModel.name
+        title = viewModel.name
         descriptionLabel.text = viewModel.description
         if let _imageURL = viewModel.imageURL {
             
